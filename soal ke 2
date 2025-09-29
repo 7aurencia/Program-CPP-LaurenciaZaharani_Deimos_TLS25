@@ -1,20 +1,28 @@
 #include <iostream>
 using namespace std;
 
-string warnaLampu(int t) {
-    int cycle = 103; // total durasi satu siklus
-    int rel = (t - 45) % cycle;
-    if (rel < 0) rel += cycle; // jaga agar tidak negatif
-
-    if (rel <= 2) return "Kuning";
-    else if (rel <= 82) return "Merah";
-    else return "Hijau";
-}
-
 int main() {
-    int times[] = {80, 135, 150, 212};
-    for (int t : times) {
-        cout << "Detik " << t << " = " << warnaLampu(t) << endl;
+    // 0: Merah, 1: Kuning, 2: Hijau
+    string warnaLampu[] = {"Merah", "Kuning", "Hijau"};
+
+    int statusLampuSekarang;
+
+    cout << "Masukkan status lampu saat ini (0=Merah, 1=Kuning, 2=Hijau): ";
+    cin >> statusLampuSekarang;
+
+    // Validasi input
+    if (statusLampuSekarang < 0 || statusLampuSekarang > 2) {
+        cout << "Input tidak valid! Masukkan hanya 0, 1, atau 2." << endl;
+        return 1;
     }
+
+    // Tampilkan status sekarang
+    cout << "Lampu sekarang berwarna: " << warnaLampu[statusLampuSekarang] << endl;
+
+    // Hitung status berikutnya
+    int statusBerikutnya = (statusLampuSekarang + 1) % 3;
+
+    cout << "Lampu berikutnya akan berwarna: " << warnaLampu[statusBerikutnya] << endl;
+
     return 0;
 }
